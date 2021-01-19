@@ -126,6 +126,9 @@
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
                     </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
@@ -147,6 +150,9 @@
                     </ie:EventTrigger>
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
                     </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
@@ -170,6 +176,9 @@
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
                     </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
@@ -191,6 +200,9 @@
                     </ie:EventTrigger>
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
                     </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
@@ -214,6 +226,9 @@
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
                     </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
@@ -235,6 +250,9 @@
                     </ie:EventTrigger>
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
                     </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
@@ -258,6 +276,9 @@
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
                     </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
@@ -279,6 +300,9 @@
                     </ie:EventTrigger>
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
                     </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
@@ -302,6 +326,9 @@
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
                     </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
@@ -323,6 +350,9 @@
                     </ie:EventTrigger>
                     <ie:EventTrigger EventName="MouseLeftButtonUp">
                         <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
                     </ie:EventTrigger>
                 </ie:Interaction.Triggers>
                 <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>

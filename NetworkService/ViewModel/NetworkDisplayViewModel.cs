@@ -225,33 +225,26 @@ namespace NetworkService.ViewModel
         {
             Canvas parentCanvas = (Canvas)VisualTreeHelper.GetParent(canvas);
 
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = canvas.Width;
-            ellipse.Height = canvas.Height;
-            ellipse.Stroke = new SolidColorBrush(Colors.Black);
-            ellipse.StrokeThickness = 4;
-
-            if (!drawing)
+            if (canvas.Resources["taken"] != null)
             {
-                Canvas.SetLeft(ellipse, Canvas.GetLeft(canvas) + ellipse.ActualWidth / 2);
-                Canvas.SetTop(ellipse, Canvas.GetTop(canvas) - ellipse.ActualHeight / 2);
+                if (!drawing)
+                {
+                    line.X1 = Canvas.GetLeft(canvas) + canvas.ActualWidth / 2;
+                    line.Y1 = Canvas.GetTop(canvas) + canvas.ActualHeight / 2;
 
-                line.X1 =  Canvas.GetLeft(canvas) + canvas.ActualWidth / 2;
-                line.Y1 = Canvas.GetTop(canvas) + canvas.ActualHeight / 2;
+                    parentCanvas.Children.Add(line);
 
-                parentCanvas.Children.Add(ellipse);
-                parentCanvas.Children.Add(line);
+                    drawing = true;
+                }
+                else
+                {
+                    line.X2 = Canvas.GetLeft(canvas) + canvas.ActualWidth / 2;
+                    line.Y2 = Canvas.GetTop(canvas) + canvas.ActualHeight / 2;
 
-                drawing = true;
-            }
-            else
-            {
-                line.X2 = Canvas.GetLeft(canvas) + canvas.ActualWidth / 2;
-                line.Y2 = Canvas.GetTop(canvas) + canvas.ActualHeight / 2;
+                    line = new Line() { StrokeThickness = 4, Stroke = new SolidColorBrush(Colors.Black) };
 
-                parentCanvas.Children.Remove(ellipse);
-
-                drawing = false;
+                    drawing = false;
+                }
             }
         }
 
