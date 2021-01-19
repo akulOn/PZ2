@@ -106,9 +106,17 @@ namespace NetworkService
                             }
                             Messenger.Default.Send<CustomMessenger>(new CustomMessenger(incommingDER.Id, incommingDER.Name, incommingDER.EnergyValue, incommingDER.Type));
 
-                            if (NetworkEntitiesViewModel.savedDERs.ToList().FirstOrDefault(x => x.Id == incommingDER.Id) != null)
+                            if (NetworkEntitiesViewModel.DERs.ToList().FirstOrDefault(x => x.Id == incommingDER.Id) != null)
                             {
-                                foreach(var item in NetworkEntitiesViewModel.savedDERs.ToList())
+                                foreach(var item in NetworkEntitiesViewModel.DERs.ToList())
+                                {
+                                    if (item.Id == incommingDER.Id)
+                                    {
+                                        item.EnergyValue = incommingDER.EnergyValue;
+                                        item.Name = incommingDER.Name;
+                                    }
+                                }
+                                foreach (var item in NetworkEntitiesViewModel.savedDERs.ToList())
                                 {
                                     if (item.Id == incommingDER.Id)
                                     {
