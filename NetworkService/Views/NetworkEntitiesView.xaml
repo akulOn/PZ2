@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="NetworkService.Views.NetworkEntitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:vml="clr-namespace:NetworkService.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             xmlns:data="clr-namespace:NetworkService.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type data:DER}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Path=Id, Mode=OneWay}" FontSize="16" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Path=Name, Mode=OneWay}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Path=Type, Mode=OneWay}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Path=EnergyValue, Mode=OneWay}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:GeneratorType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Generatori:" FontSize="20" FontWeight="Bold"/>
+                <DataGrid x:Name="DERsList" ItemsSource="{Binding DERs}" SelectedItem="{Binding RemoveDER}" MaxHeight="550" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="10"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Ime" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Type}" Header="Tip" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding EnergyValue}" Header="Energetska vrednost" Width="*"/>
+                    </DataGrid.Columns>
+                    <ie:Interaction.Triggers>
+                        <ie:EventTrigger EventName="SelectionChanged">
+                            <ie:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=DERsList, Path=SelectedItem}"/>
+                        </ie:EventTrigger>
+                    </ie:Interaction.Triggers>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Button Content="Obriši" Command="{Binding DeleteDERCommand}"/>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Dodaj generator:" FontSize="20" FontWeight="Bold" />
+                <!--
+                <TextBlock Text="Id:"/>
+                <TextBox Text="{Binding CurrentDER.Id, Mode=TwoWay}"/>
+                <TextBlock Text="{Binding CurrentDER.ValidationErrors[Id]}" Foreground="Red"/>
+                
+                <TextBlock Text="Name:"/>
+                <TextBox Text="{Binding CurrentDER.Name, Mode=TwoWay}"/>
+                <TextBlock Text="{Binding CurrentDER.ValidationErrors[Name]}" Foreground="Red"/>
+                -->
+                <TextBlock Text="Tip:"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding CurrentDER.Type}"/>
+                <TextBlock Text="{Binding CurrentDER.ValidationErrors[Type]}" Foreground="Red"/>
+                <!--
+                <TextBlock Text="EnergyValue:"/>
+                <TextBox Text="{Binding CurrentDER.EnergyValue, Mode=TwoWay}"/>
+                <TextBlock Text="{Binding CurrentDER.ValidationErrors[EnergyValue]}" Foreground="Red"/>
+                -->
+                <Button Content="Dodaj" Command="{Binding AddDERCommand}"/>
+
+                <StackPanel x:Name="stackPanel">
+                    <ie:Interaction.Triggers>
+                        <ie:EventTrigger EventName="Loaded">
+                            <ie:InvokeCommandAction Command="{Binding LoadStackPanelCommand}" CommandParameter="{Binding ElementName=stackPanel}"/>
+                        </ie:EventTrigger>
+                    </ie:Interaction.Triggers>
+
+                    <Label Content="Filteri:" FontSize="20" FontWeight="Bold" />
+
+                    <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding FilterDER.Type}"/>
+                    <Button Content="Filtriraj na osnovu tipa" Command="{Binding FilterComboBoxDERCommand}"/>
+
+                    <RadioButton Content="Veće od Id" IsChecked="True" />
+                    <RadioButton Content="Manje od Id" />
+                    <TextBox Text="{Binding FilterDER.Id}" />
+                    <TextBlock Text="{Binding FilterDER.ValidationErrors[Id]}" Foreground="Red"/>
+                    <Button Content="Filtriraj na osnovu Id-a" Command="{Binding FilterRadioButtonDERCommand}" CommandParameter="{Binding ElementName=stackPanel}"/>
+                    <ComboBox x:Name="comboBox" >
+                        <ie:Interaction.Triggers>
+                            <ie:EventTrigger EventName="SelectionChanged">
+                                <ie:InvokeCommandAction Command="{Binding SelectedItemChangedComboBox1Command}" CommandParameter="{Binding ElementName=comboBox, Path=SelectedItem}"/>
+                            </ie:EventTrigger>
+                        </ie:Interaction.Triggers>
+                    </ComboBox>
+                    <Separator Height="10" Background="Transparent"/>
+
+                    <Button Content="Kombinovano filtriranje" Command="{Binding FilterComboDERCommand}" CommandParameter="{Binding ElementName=stackPanel}"/>
+                    <ComboBox x:Name="comboBoxCombo" >
+                        <ie:Interaction.Triggers>
+                            <ie:EventTrigger EventName="SelectionChanged">
+                                <ie:InvokeCommandAction Command="{Binding SelectedItemChangedComboBox2Command}" CommandParameter="{Binding ElementName=comboBoxCombo, Path=SelectedItem}"/>
+                            </ie:EventTrigger>
+                        </ie:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

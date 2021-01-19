@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="NetworkService.Views.MeasurementGraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:vml="clr-namespace:NetworkService.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             mc:Ignorable="d" 
+             xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
+             xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             d:DesignHeight="700" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" Margin="0 50 0 0" Grid.RowSpan="2" VerticalAlignment="Top">
+            <ComboBox Width="200" Height="22" Name="cbEntity">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="SelectionChanged">
+                        <ie:InvokeCommandAction Command="{Binding SelectedItemChangedComboBoxCommand}" CommandParameter="{Binding ElementName=cbEntity, Path=SelectedItem}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="Loaded">
+                        <ie:InvokeCommandAction Command="{Binding LoadedComboBoxCommand}" CommandParameter="{Binding ElementName=cbEntity}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+            </ComboBox>
+            <Button Width="200" Height="22" Content="Prikaži" Command="{Binding ShowEntityCommand}" CommandParameter="{Binding ElementName=showCanvas}"/>
+            <TextBlock Text="{Binding ShowEntity}" FontSize="40" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!--y values-->
+
+
+        <!--from last-->
+        <!--<TextBlock  Text="(val ->)" Grid.Row="2" VerticalAlignment="Top"/>-->
+
+        <StackPanel Margin="0 0 0 0" Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock HorizontalAlignment="Left" Text="Prvo"/>
+            <TextBlock Text="Drugo" Margin="50 0 0 0"/>
+            <TextBlock Text="Treće" Margin="50 0 0 0"/>
+            <TextBlock Text="Četvrto" Margin="50 0 0 0"/>
+            <TextBlock Text="Peto" Margin="50 0 0 0"/>
+
+        </StackPanel>
+
+        <Canvas x:Name="showCanvas" Grid.Column="1" Grid.Row="1" Width="350" Height="270" Background="Transparent" HorizontalAlignment="Left">
+            <ie:Interaction.Triggers>
+                <ie:EventTrigger EventName="Loaded">
+                    <ie:InvokeCommandAction Command="{Binding LoadCanvasCommand}" CommandParameter="{Binding ElementName=showCanvas}"/>
+                </ie:EventTrigger>
+            </ie:Interaction.Triggers>
+            <!--referentne linije-->
+            <Line X1="10" Y1="260" X2="340" Y2="260" Stroke="White" StrokeThickness="2"/>
+            <Line X1="10" Y1="220" X2="340" Y2="220" Stroke="White" StrokeThickness="1"/>
+            <Line X1="10" Y1="180" X2="340" Y2="180" Stroke="White" StrokeThickness="1"/>
+            <Line X1="10" Y1="140" X2="340" Y2="140" Stroke="White" StrokeThickness="1"/>
+            <Line X1="10" Y1="100" X2="340" Y2="100" Stroke="White" StrokeThickness="1"/>
+            <Line X1="10" Y1="60" X2="340" Y2="60"   Stroke="White" StrokeThickness="1"/>
+
+        </Canvas>
+    </Grid>
+</UserControl>

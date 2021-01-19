@@ -1,0 +1,334 @@
+﻿<UserControl x:Class="NetworkService.Views.NetworkDisplayView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:vml="clr-namespace:NetworkService.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="listViewDisplay" Grid.RowSpan="7" Grid.Column="7" ItemsSource="{Binding DisplayDERs}" SelectedItem="{Binding SelectedDisplayDER}" MaxHeight="600">
+            <ie:Interaction.Triggers>
+                <ie:EventTrigger EventName="SelectionChanged">
+                    <ie:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=listViewDisplay, Path=SelectedItem}"/>
+                </ie:EventTrigger>
+                <ie:EventTrigger EventName="MouseLeftButtonUp">
+                    <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}" CommandParameter="{Binding ElementName=listViewDisplay}"/>
+                </ie:EventTrigger>
+                <ie:EventTrigger EventName="Loaded">
+                    <ie:InvokeCommandAction Command="{Binding LoadListViewCommand}" CommandParameter="{Binding ElementName=listViewDisplay}"/>
+                </ie:EventTrigger>
+            </ie:Interaction.Triggers>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Width="150" Height="100" Source="{Binding ImageSource}" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Canvas x:Name="mainCanvas" Grid.RowSpan="7" Grid.ColumnSpan="5">
+            <ie:Interaction.Triggers>
+                <ie:EventTrigger EventName="Loaded">
+                    <ie:InvokeCommandAction Command="{Binding MainCanvasLoadedCommand}" CommandParameter="{Binding ElementName=mainCanvas}"/>
+                </ie:EventTrigger>
+            </ie:Interaction.Triggers>
+            <Button Width="140" Height="20" Content="Rasporedi" Canvas.Top="10" Command="{Binding ArrangeElementsCommand}"  CommandParameter="{Binding ElementName=mainCanvas}" Canvas.Left="424"/>
+            <Canvas x:Name="canvas0" Width="140" Height="90" Canvas.Left="35" Canvas.Top="35" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas0}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas0}"/>
+            </Canvas>
+            <Canvas x:Name="canvas1" Width="140" Height="90" Canvas.Left="230" Canvas.Top="35" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseRightButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseRightButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas1}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas1}"/>
+            </Canvas>
+            <Canvas x:Name="canvas2" Width="140" Height="90" Canvas.Left="424" Canvas.Top="35" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas2}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas2}"/>
+            </Canvas>
+            <Canvas x:Name="canvas3" Width="140" Height="90" Canvas.Left="35" Canvas.Top="185" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas3}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas3}"/>
+            </Canvas>
+            <Canvas x:Name="canvas4" Width="140" Height="90" Canvas.Left="230" Canvas.Top="185" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas4}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas4}"/>
+            </Canvas>
+            <Canvas x:Name="canvas5" Width="140" Height="90" Canvas.Left="424" Canvas.Top="185" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas5}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas5}"/>
+            </Canvas>
+            <Canvas x:Name="canvas6" Width="140" Height="90" Canvas.Left="35" Canvas.Top="335" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas6}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas6}"/>
+            </Canvas>
+            <Canvas x:Name="canvas7" Width="140" Height="90" Canvas.Left="229" Canvas.Top="335" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas7}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas7}"/>
+            </Canvas>
+            <Canvas x:Name="canvas8" Width="140" Height="90" Canvas.Left="424" Canvas.Top="335" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas8}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas8}"/>
+            </Canvas>
+            <Canvas x:Name="canvas9" Width="140" Height="90" Canvas.Left="35" Canvas.Top="480" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas9}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas9}"/>
+            </Canvas>
+            <Canvas x:Name="canvas10" Width="140" Height="90" Canvas.Left="230" Canvas.Top="480" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas10}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas10}"/>
+            </Canvas>
+            <Canvas x:Name="canvas11" Width="140" Height="90" Canvas.Left="424" Canvas.Top="480" Background="Azure" AllowDrop="True">
+                <ie:Interaction.Triggers>
+                    <ie:EventTrigger EventName="Drop">
+                        <ie:InvokeCommandAction Command="{Binding DropCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragOver">
+                        <ie:InvokeCommandAction Command="{Binding DragOverCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="DragLeave">
+                        <ie:InvokeCommandAction Command="{Binding DragLeaveCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonDown">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonDownCanvasCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                    <ie:EventTrigger EventName="MouseLeftButtonUp">
+                        <ie:InvokeCommandAction Command="{Binding MouseLeftButtonUpCanvasCommand}" CommandParameter="{Binding ElementName=canvas11}"/>
+                    </ie:EventTrigger>
+                </ie:Interaction.Triggers>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center">Slobodno mesto</TextBlock>
+                <TextBlock Width="71" Canvas.Left="0" Canvas.Top="52" Height="35" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                <Button Width="140" Height="20" Content="Oslobodi" Canvas.Top="92" Command="{Binding FreeCanvasCommand}"  CommandParameter="{Binding ElementName=canvas11}"/>
+            </Canvas>
+        </Canvas>
+    </Grid>
+</UserControl>
